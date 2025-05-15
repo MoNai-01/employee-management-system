@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.EmploymentHistory>
+
+<h2>Employment History</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Company</th>
+            <th>Position</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Employee.FirstName @item.Employee.LastName</td>
+                <td>@item.CompanyName</td>
+                <td>@item.Position</td>
+                <td>@item.StartDate.ToShortDateString()</td>
+                <td>@(item.EndDate?.ToShortDateString() ?? "Present")</td>
+            </tr>
+        }
+    </tbody>
+</table>
