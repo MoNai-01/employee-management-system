@@ -3,10 +3,18 @@ using EmployeeManagementSystem.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Read environment variables
+var dbServer = "db"; // container name from docker-compose.yml
+var dbName = Environment.GetEnvironmentVariable("MYSQL_DATABASE") ?? "EmployeeManagementDB";
+var dbUser = "root";
+var dbPassword = Environment.GetEnvironmentVariable("MYSQL_ROOT_PASSWORD") ?? "default_pass";
+
+// Build the connection string dynamically
+var connectionString = $"Server={dbServer};Database={dbName};User={dbUser};Password={dbPassword};";
+
 // Add MySQL DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString,
         ServerVersion.AutoDetect(connectionString),
         mySqlOptions =>
@@ -22,13 +30,13 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// Run migrations and seed data
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
-        // Apply pending migrations
         context.Database.Migrate();
         SeedData.Initialize(context);
     }
@@ -39,14 +47,13 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
-app.UseExceptionHandler("/Home/Error");
-app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
-//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
