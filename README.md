@@ -12,9 +12,8 @@ This is a simple ASP.NET Core MVC application for managing employees. It uses My
 ---
 
 ## 📦 Setup & Run
-
-### 1. Clone the Repo
 ```bash
+### 1. Clone the Repo
 git clone https://github.com/MoNai-01/employee-management-system.git
 cd employee-management-system
 
