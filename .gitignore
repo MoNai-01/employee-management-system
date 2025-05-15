@@ -1,0 +1,33 @@
+# Build results
+bin/
+obj/
+out/
+build/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Rider / JetBrains
+.idea/
+
+# Logs
+*.log
+
+# Secrets and environment
+.env
+
+# Docker
+docker-compose.override.yml
+
+# Others
+*.db
