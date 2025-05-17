@@ -21,16 +21,15 @@ cd employee-management-system
 
 ## 🔧 Configuration
 
-Before running the project, update your MySQL root password and your database name in `appsettings.json` and docker-compose.yml:
-
-```json
+Before running the project, update your MySQL root password and your database name in `appsettings.json` and `docker-compose.yml`:
 - appsettings.json
+```json
 "ConnectionStrings": {
   "DefaultConnection": "server=localhost;port=3306;database=YOUR_DB_HERE;user=root;password=YOUR_PASSWORD_HERE;"
 }
 ```
-```yml
 - docker-compose.yml
+```yml
 MYSQL_ROOT_PASSWORD: YOUR_PASSWORD_HERE
 MYSQL_DATABASE: YOUR_DB_HERE
 ```
