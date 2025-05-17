@@ -19,13 +19,20 @@ git clone https://github.com/MoNai-01/employee-management-system.git
 cd employee-management-system
 ```
 
-### 2. Create a `.env` File
-In the root directory, create a `.env` file and add the following environment variables:
-```env
-MYSQL_ROOT_PASSWORD=your_mysql_root_password
-MYSQL_DATABASE=EmployeeManagementDB
-ASPNETCORE_ENVIRONMENT=Development
-ASPNETCORE_URLS=http://+:5044
+## 🔧 Configuration
+
+Before running the project, update your MySQL root password and your database name in `appsettings.json` and docker-compose.yml:
+
+```json
+- appsettings.json
+"ConnectionStrings": {
+  "DefaultConnection": "server=localhost;port=3306;database=YOUR_DB_HERE;user=root;password=YOUR_PASSWORD_HERE;"
+}
+```
+```yml
+- docker-compose.yml
+MYSQL_ROOT_PASSWORD: YOUR_PASSWORD_HERE
+MYSQL_DATABASE: YOUR_DB_HERE
 ```
 
 ### 3. Build and Run with Docker Compose
