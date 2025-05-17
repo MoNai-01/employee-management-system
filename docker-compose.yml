@@ -4,21 +4,21 @@ services:
   web:
     build: .
     ports:
-      - "5044:5044"
+      - "5044:5044"  # Changed to match your desired port
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
-      - ASPNETCORE_URLS=${ASPNETCORE_URLS}
-      - ConnectionStrings__DefaultConnection=Server=db;Database=${MYSQL_DATABASE};User=root;Password=${MYSQL_ROOT_PASSWORD};
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5044  # Force port 5044
+      - ConnectionStrings__DefaultConnection=Server=db;Database=YOUR_DB_HERE;User=root;Password=YOUR_PASSWORD_HERE;
     depends_on:
       db:
         condition: service_healthy
-    restart: on-failure
+    restart: on-failure  # Auto-restart if MySQL isn't ready
 
   db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: MySQL_pass
+      MYSQL_DATABASE: EmployeeManagementDB
     ports:
       - "3306:3306"
     volumes:
